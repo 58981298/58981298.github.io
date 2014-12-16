@@ -12,7 +12,7 @@
 &nbsp;&nbsp;&nbsp;1. Hexo介绍&nbsp;&nbsp;&nbsp;2. Hexo安装&nbsp;&n">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于hexo + github搭建的博客之一">
-<meta property="og:url" content="http://58981298.github.io/2014/12/14/blog_1/">
+<meta property="og:url" content="http://58981298.github.io/2014/12/14/blog_2/">
 <meta property="og:site_name" content="hexo_blog">
 <meta property="og:description" content="此文章基于nodejs而写，请先了解nodejs
 前言
@@ -20,7 +20,6 @@
 目录
 &nbsp;&nbsp;&nbsp;1. Hexo介绍&nbsp;&nbsp;&nbsp;2. Hexo安装&nbsp;&n">
 <meta property="og:image" content="/img/2014/12/14/001.jpg">
-<meta property="og:image" content="/img/2014/12/14/002.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于hexo + github搭建的博客之一">
 <meta name="twitter:description" content="此文章基于nodejs而写，请先了解nodejs
@@ -75,9 +74,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-blog_1" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-blog_2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/12/14/blog_1/" class="article-date">
+    <a href="/2014/12/14/blog_2/" class="article-date">
   <time datetime="2014-12-14T01:38:05.000Z" itemprop="datePublished">12月 14 2014</time>
 </a>
     
@@ -121,22 +120,12 @@
 
 <p>&nbsp;&nbsp;&nbsp;此时服务已正常启动，端口4000，浏览器中输入localhost:4000即可访问，如下<br><img src="/img/2014/12/14/001.jpg" alt="blog demo" title="blog demo"></p>
 <h2 id="4-_Hexo部署">4. Hexo部署</h2>
-<p>&nbsp;&nbsp;&nbsp;hexo部署的文件是静态文件，所以必须先生成静态文件才能放到github上面<br>&nbsp;&nbsp;&nbsp;静态文件的默认路径是应用根目录下的public<br>&nbsp;&nbsp;&nbsp;静态文件放到你github的username.github.io库中，没有便自建此库，github.com:username/username.github.io.git<br>&nbsp;&nbsp;&nbsp;上传成功后，打开你的github二级域名即可看到你的博客，<a href="http://58981298.github.io" target="_blank" rel="external">http://58981298.github.io</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">C:\code\hexo_blog&gt;hexo generate</div><div class="line">[info] Files loaded <span class="keyword">in</span> <span class="number">0.090</span>s</div><div class="line">[create] Generated: archives/index.html (<span class="number">53</span>ms)</div><div class="line">[create] Generated: archives/<span class="number">2014</span>/index.html (<span class="number">13</span>ms)</div><div class="line">[create] Generated: archives/<span class="number">2014</span>/<span class="number">12</span>/index.html (<span class="number">8</span>ms)</div><div class="line">[create] Generated: index.html (<span class="number">12</span>ms)</div><div class="line">[create] Generated: <span class="number">2014</span>/<span class="number">12</span>/<span class="number">14</span>/hello-world/index.html (<span class="number">26</span>ms)</div><div class="line">[create] Generated: js/script.js (<span class="number">3</span>ms)</div><div class="line">[create] Generated: fancybox/blank.gif (<span class="number">2</span>ms)</div><div class="line">[create] Generated: fancybox/fancybox_loading.gif (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/fancybox_loading@<span class="number">2</span>x.gif (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/fancybox_overlay.png (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/fancybox_sprite.png (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/fancybox_sprite@<span class="number">2</span>x.png (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/jquery.fancybox.css (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/jquery.fancybox.js (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/jquery.fancybox.pack.js (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/fancybox_buttons.png (<span class="number">2</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/jquery.fancybox-buttons.css (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/jquery.fancybox-buttons.js (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/jquery.fancybox-media.js (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/jquery.fancybox-thumbs.css (<span class="number">1</span>ms)</div><div class="line">[create] Generated: fancybox/helpers/jquery.fancybox-thumbs.js (<span class="number">1</span>ms)</div><div class="line">[create] Generated: css/style.css (<span class="number">608</span>ms)</div><div class="line">[create] Generated: css/fonts/FontAwesome.otf (<span class="number">2</span>ms)</div><div class="line">[create] Generated: css/fonts/fontawesome-webfont.eot (<span class="number">1</span>ms)</div><div class="line">[create] Generated: css/fonts/fontawesome-webfont.svg (<span class="number">2</span>ms)</div><div class="line">[create] Generated: css/fonts/fontawesome-webfont.ttf (<span class="number">2</span>ms)</div><div class="line">[create] Generated: css/fonts/fontawesome-webfont.woff (<span class="number">2</span>ms)</div><div class="line">[create] Generated: css/images/banner.jpg (<span class="number">3</span>ms)</div><div class="line">[info] <span class="number">28</span> files generated <span class="keyword">in</span> <span class="number">0.772</span>s</div></pre></td></tr></table></figure>
-
-<p><img src="/img/2014/12/14/002.jpg" alt="public"></p>
-<p>这是一篇搭建blog的教程之一</p>
-<p>通过nodejs + hexo + github搭建的</p>
-<p>issues：</p>
-<h2 id="Q1-_模板未解析">Q1. 模板未解析</h2>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;%- partial(<span class="string">'_partial/head'</span>) %&gt;</div><div class="line">&lt;%- partial(<span class="string">'_partial/header'</span>, null, {cache: !config.relative_link}) %&gt;</div><div class="line">&lt;%- body %&gt;</div><div class="line">&lt;% <span class="keyword">if</span> (theme.sidebar && theme.sidebar !== <span class="string">'bottom'</span>){ %&gt; &lt;%- partial(<span class="string">'_partial/sidebar'</span>, null, {cache: !config.relative_link}) %&gt; &lt;% } %&gt;</div><div class="line">&lt;%- partial(<span class="string">'_partial/footer'</span>, null, {cache: !config.relative_link}) %&gt;</div><div class="line">&lt;%- partial(<span class="string">'_partial/mobile-nav'</span>, null, {cache: !config.relative_link}) %&gt; &lt;%- partial(<span class="string">'_partial/after-footer'</span>) %&gt;</div></pre></td></tr></table></figure>
-
-<p>A1. nodejs默认没有依赖，命令行使用npm install安装默认依赖，依赖配置文件是package.json</p>
+<p>&nbsp;&nbsp;&nbsp;hexo部署的文件是静态文件，所以必须先生成静态文件才能放到github上面<br>这是一篇搭建blog的教程之一</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://58981298.github.io/2014/12/14/blog_1/" data-id="ee7ace6f6ibzzk9v" class="article-share-link">Share</a>
+      <a data-url="http://58981298.github.io/2014/12/14/blog_2/" data-id="mhop1zjyzdt27yl0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog/">blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/course/">course</a></li></ul>
@@ -147,15 +136,20 @@
     
 <nav id="article-nav">
   
-    <a href="/2014/12/14/blog_2/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2014/12/14/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          基于hexo + github搭建的博客之一
+          Hello World
         
       </div>
     </a>
   
+  
+    <a href="/2014/12/14/blog_1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">基于hexo + github搭建的博客之一</div>
+    </a>
   
 </nav>
 

@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+	<%- include ../block/head_start %>
+		<meta name="keywords" content="template">
+		<meta name="description" content="template">
+		<title>template</title>
+	<%- include ../block/head_end %>
+	<body>
+		<%- include ../block/body_header %>
+		<%- include ../block/body_banner %>
+		<section class="section cls">
+			<div class="markdown-artical">
+				<h1><%= title %></h1>
+				<h3>前言</h3>
+
+<p>fs是nodejs的文件操作模块，所有基于fs操作都必须引入fs模块，常用以下代码引入
+<code>
+var fs = require('fs');
+</code>
+下面将介绍其基本操作。 <br />
+官方FS的操作文档 <a href="http://nodejs.cn/api/fs/" title="fs操作文档">http://nodejs.cn/api/fs/</a> <br />
+首先说明下，常规事件都是异步的，同时也存在同步sync事件， <br />
+异步是存在err对象，而sync的不存在，所以可以考虑利用try-catch来捕捉异常  </p>
+
+<h2>常用的操作文档</h2>
+
+<ul>
+<li>fs.readFile 读取文件，三个参数，第二个参数可省略
+<code>
+fs.readFile("c:/code/demo/c.txt", "utf-8", function(err, data){ <br />
+　　if(err) throw err; <br />
+　　console.log(data); <br />
+}); <br />
+</code></li>
+<li>fs.readFileSync readFile的同步版本
+<code>
+var data = fs.readFileSync("c:/code/demo/c.txt", "utf-8"); <br />
+console.log(data);
+</code></li>
+<li>fs.writeFile 写入文件，三个参数，第二个参数可省略
+<code>
+fs.writeFile("c:/code/demo/c.txt", "utf-8", function(err){ <br />
+　　if(err) throw err; <br />
+　　// doing <br />
+}); <br />
+</code></li>
+<li>fs.writeFileSync readFile的同步版本
+<code>
+fs.writeFileSync("c:/code/demo/c.txt", "utf-8"); <br />
+</code></li>
+</ul>
+			</div>
+		</section>
+		<%- include ../block/body_footer %>
+	</body>
+</html>

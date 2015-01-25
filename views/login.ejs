@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<title><%= title %></title>
+		<script type="text/javascript" src="/common/js/jquery.min.js"></script>
+	</head>
+	<body>
+		<input type="text" id="name" value="name" placeholder="username">
+		<input type="password" id="pw" value="" placeholder="password">
+		<button id="btn">登录</button>
+		<button id="getbtn">get登录</button>
+
+		<script type="text/javascript">
+		$(function(){
+			$('#btn').click(function(){
+				var name = $('#name').val();
+				var pw = $('#pw').val();
+				console.log(name+","+pw);
+				$.ajax({
+					url: "/login",
+					data: {
+						__method: "POST",
+						username: name,
+						password: pw
+					},
+					success: function(data){
+						console.log(data);
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+			});
+
+			$('#getbtn').click(function(){
+				$.ajax({
+					url: "/md5/",
+					data: {
+						password: $('#pw').val()
+					},
+					success: function(data){
+						console.log(data);
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+			});
+
+		});
+		</script>
+	</body>
+</html>

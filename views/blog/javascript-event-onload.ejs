@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+	<%- include ../block/head_start %>
+		<meta name="keywords" content="template">
+		<meta name="description" content="template">
+		<title>template</title>
+	<%- include ../block/head_end %>
+	<body>
+		<%- include ../block/body_header %>
+		<%- include ../block/body_banner %>
+		<section class="section cls">
+			<div class="markdown-artical">
+				<h1><%= title %></h1>
+				<p>根据w3school所介绍的<a href="http://www.w3school.com.cn/jsref/event_onload.asp" title="w3school onload">onload</a></p>
+
+<p>只能支持的标签：
+<code>
+&lt;body&gt;, &lt;frame&gt;, &lt;frameset&gt;, &lt;iframe&gt;, &lt;img&gt;, &lt;link&gt;, &lt;script&gt;
+</code>
+只能支持的Javascript对象：
+<code>
+image, layer, window
+</code>
+接下来先说说，页面加载顺序：</p>
+
+<ul>
+<li>解析HTML结构。</li>
+<li>加载外部脚本和样式表文件。</li>
+<li>解析并执行脚本代码。</li>
+<li>构造HTML DOM模型。</li>
+<li>加载图片等外部文件。</li>
+<li>页面加载完毕。</li>
+</ul>
+
+<p>也就是： <br />
+html → head → title → #text(网页标题) → style → 加载样式 → 解析样式 → link → 加载外部样式表文件 → 解析外部样式表 → script → 加载外部脚本文件 → 解析外部脚本文件 → 执行外部脚本 → body → div → script → 加载脚本 → 解析脚本 → 执行脚本 → img → script → 加载脚本 → 解析脚本 → 执行脚本 → 加载外部图像文件 → 页面初始化完毕。
+JS 的初始化装载。</p>
+
+<ul>
+<li>写这篇文章的初衷是因为有个项目需要加载完全部图片才能执行，</li>
+<li>而window.onload明文规定当页面css、js、img等加载完便可执行，但不知外链css里面的img即背景音乐算不算进去；  </li>
+<li>于是对于此问题进行一次测试，结果是外链css里面的img也是支持window.onload事件。  </li>
+<li>项目终于能够使用window.onload来处理图片后在执行自定义事件。</li>
+</ul>
+
+<p>注：曾见过一篇文章问为什么windown.onload为什么无效，依然一进去页面就立即执行，代码大概如下 <br />
+<code>
+window.onload = test(); <br />
+function test(){ <br />
+　　alert("window onload"); <br />
+} <br />
+&lt;body onload="alert("body load");"&gt;&lt;/body&gt; <br />
+</code>
+结果很明显，window.onload的事件被覆盖，window.onload结果为test函数的返回值；
+正确写法之一应该是
+<code>
+window.onload = function(){ <br />
+　　alert("window load"); <br />
+} <br />
+</code>
+至于window.onload和body.onload的孰快孰慢自己测试</p>
+
+<p>最后感谢 <a href="http://www.xiamiz.com/a/jiaocheng/20120723/108264.html">http://www.xiamiz.com/a/jiaocheng/20120723/108264.html</a></p>
+			</div>
+		</section>
+		<%- include ../block/body_footer %>
+	</body>
+</html>

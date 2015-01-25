@@ -1,0 +1,17 @@
+### [Github](https://github.com/ "github")
+### [Markdown 语法说明（简体中文版）](http://wowubuntu.com/markdown/#link "markdown")
+### [Nodejs fs API](http://nodejs.cn/api/fs/ "nodejs fs api")
+### [网址在线检测](http://wave.webaim.org/ "网址在线检测")
+### [3D图片环](http://www.zhinengshe.com/works/3540/zns_demo.html "3D图片环")
+### [插件、素材、模板](http://www.dowebok.com/ "插件、素材、模板")
+### [Nodejs官网](http://nodejs.org/ "nodejs")
+### [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript "JavaScript")
+### [开发常用在线网址](http://it.webkfa.com/ "开发常用在线网址")
+### [智能社](http://www.zhinengshe.com/ "智能社")
+### [icon转成base64编码](http://www.base64-image.de/step-1.php "icon转成base64编码")
+### [正则在线测试](http://tool.chinaz.com/regex/ "正则在线测试")
+### [快递查询接口](http://www.kuaidi100.com/openapi/ "快递查询接口")
+### [QQ一键加群](http://qun.qq.com/join.html "QQ一键加群")
+### [console详解](http://www.css88.com/archives/3678 "console详解")
+
+<script src="/common/js/demo.js"></script>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+		<title><%= title %></title>
+		<script type="text/javascript" src="/common/js/jquery.min.js"></script>
+	</head>
+	<body>
+		<table>
+			<thead>
+				<tr>
+					<th>filename</th>
+					<th>articalname</th>
+					<th>content</th>
+					<th>sort</th>
+					<th>tag</th>
+					<th>guidang</th>
+				</tr>
+			</thead>
+			<tbody id="tb">
+				<tr>
+					<td>1.md</td>
+					<td>safasdf</td>
+					<td>css</td>
+					<td>animate</td>
+					<td>2015.01.04</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="text" id="name" value="name" placeholder="username">
+		<input type="password" id="pw" value="" placeholder="password">
+		<button id="update">更新</button>
+		<button id="getbtn">get登录</button>
+
+		<script type="text/javascript">
+		$(function(){
+			$.ajax({
+				url: "/manage/",
+				data: {
+					__method: "GET"
+				},
+				success: function(data){
+					console.log( data );
+					var art = data.artical;
+					var html = "";
+					for(var i=0; i< art.length; i++){
+						html += '<tr>'+
+									'<td><input type="text" value="' + art[i].filename + '"></td>'+
+									'<td><input type="text" value="' + art[i].articalname + '"></td>'+
+									'<td><input type="text" value="' + art[i].content + '"></td>'+
+									'<td><input type="text" value="' + art[i].sort + '"></td>'+
+									'<td><input type="text" value="' + art[i].tag + '"></td>'+
+									'<td><input type="text" value="' + art[i].archive + '"></td>'+
+								'</tr>';
+					}
+					$("#tb").html(html);
+				}
+			})
+
+			$("#update").click(function(){
+				var data = {};
+				data.artical = [];
+				var inp = "";
+				$("#tb tr").each(function(index){
+					inp = $("#tb tr").eq(index).find("input");
+					data.artical[index] = {};
+					data.artical[index].filename = inp.eq(0).val();
+					data.artical[index].articalname = inp.eq(1).val();
+					data.artical[index].content = inp.eq(2).val();
+					data.artical[index].sort = inp.eq(3).val();
+					data.artical[index].tag = inp.eq(4).val();
+					data.artical[index].archive = inp.eq(5).val();
+				});
+				$.ajax({
+				url: "/manage/",
+					data: {
+						__method: "POST",
+						data: JSON.stringify(data)
+					},
+					success: function(data){
+						console.log( data );
+					}
+				})
+			});
+		});
+		</script>
+	</body>
+</html>

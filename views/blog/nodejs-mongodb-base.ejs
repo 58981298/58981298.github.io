@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+	<%- include ../block/head_start %>
+		<meta name="keywords" content="template">
+		<meta name="description" content="template">
+		<title>template</title>
+	<%- include ../block/head_end %>
+	<body>
+		<%- include ../block/body_header %>
+		<%- include ../block/body_banner %>
+		<section class="section cls">
+			<div class="markdown-artical">
+				<h1><%= title %></h1>
+				<h1>mongodb-tes</h1>
+
+<p>mongodb入门，初步掌握其基本操作
+本测试提供demo，端口默认1212，地址/test <br />
+测试访问地址：http://localhost:1212/test,具体实际地址根据实际情况请自行调整
+由于测试数据库较大，暂不上传</p>
+
+<h2>下载并安装mongodb</h2>
+
+<p>https://www.mongodb.org/downloads</p>
+
+<h2>mongodb全局命令行操作</h2>
+
+<p>把mongodb安装目录下的bin目录加入到windows的环境变量中</p>
+
+<h2>为数据库指定存放路径，并启动数据库服务</h2>
+
+<p>cd到项目下，新建一个文件夹来存放数据库，如data，输入： <br />
+<code>bash
+cd YourApplication <br />
+mongod -dbpath ./data <br />
+</code>
+提示"[initandlisten] waiting for connections on port 27017"的时候说明正常启动成功 <br />
+此时数据库已经启动</p>
+
+<h2>命令行模式下测试mongodb( 测试数据库名：clary )</h2>
+
+<ul>
+<li><p>进入mongodb命令行模式 <br />
+cmd命令行下执行mongo进去mongodb的命令行模式
+<code>bash
+mongo <br />
+</code> </p></li>
+<li><p>新建数据库 <br />
+<code>bash
+use clary <br />
+</code> <br />
+使用上面命令后还不会创建数据库，当有数据插入后它才会去创建数据库</p></li>
+<li><p>插入数据 <br />
+插入一条数据：用户名test1001，邮箱test1001@qq.com <br />
+<code>bash
+db.usercolection.insert({"username":"test1001", "email":"test1001@qq.com"}) <br />
+</code> <br />
+成功后看不到任何东西（不友好），执行查找看看是否插入成功</p></li>
+<li><p>查找数据 <br />
+<code>bash
+db.usercollection.find() <br />
+</code>
+查找并显示数据，（字符串类型输出）
+<code>bash <br />
+db.usercollection.find().pretty() <br />
+</code> <br />
+查找并显示数据，（json类型输出） </p></li>
+<li><p>多数据插入（使用数组插入） <br />
+插入两条数据：用户名test1002，邮箱test1002@qq.com 和 用户名test1003，邮箱test1003@qq.com <br />
+<code>bash
+var temp_array = [{"username":"test1002", "email":"test1002@qq.com"}, <br />
+                     {"username":"test1003", "email":"test1003@qq.com"}]; <br />
+db.usercollection.insert(temp_array) <br />
+</code> <br />
+查看是否插入成功 <br />
+<code>bash
+db.usercollection.find().pretty() <br />
+</code></p></li>
+</ul>
+
+<h2>nodejs文件里面使用mongodb( 测试数据库名：clary )</h2>
+
+<ul>
+<li><p>为项目安装相关的mongodb并写入包配置文件 <br />
+<code>bash
+    npm install mongodb --save <br />
+    npm install monk --save <br />
+</code></p></li>
+<li><p>文件引入mongodb, 配置mongodb数据库链接地址，并查询 <br />
+<code>javascript
+    var mongo = require("mongodb"); <br />
+    var monk = require("monk"); // 引入mongodb相关依赖 <br />
+    var db = monk("localhost:27017/clary") // 配置mongodb数据库链接地址 <br />
+    var collection = db.get("usercollection"); // 开始使用db查询 <br />
+    collection.find({},{}, function(err, data){ <br />
+    　　console.log(data); // 输出查询到的json数据 <br />
+    }) <br />
+</code></p></li>
+<li><p>新增数据 <br />
+插入一条数据：用户名test1004, 邮箱test1004@qq.com
+<code>javascript
+var collection = db.get("usercollection"); // 开始使用db查询 <br />
+collection.insert({ <br />
+username: "test1004", <br />
+　　　email: "test1004@qq.com" <br />
+}, function(err, data){ <br />
+　　　console.log(data); // 输出插入成功的那条json数据（含id） <br />
+}) <br />
+</code></p></li>
+<li><p>demo下载：<a href="https://github.com/unclary/mongodb-test" title="mongodb-test">mongodb-test</a></p></li>
+<li>感谢 <a href="http://www.toolmao.com/nodejs-express-ejs-mongodb-server">express+mongodb教程</a>  </li>
+</ul>
+			</div>
+		</section>
+		<%- include ../block/body_footer %>
+	</body>
+</html>

@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+	<%- include block/head_start %>
+		<title>clary_blog</title>
+	<%- include block/head_end %>
+	<body>
+		<%- include block/body_header %>
+		<%- include block/body_banner %>
+		<section class="section cls">
+			<div class="">
+				<ul class="list">
+					<% for( var i=0; i<list.length; i++ ){ %>
+						<li>
+							<a href="/blog/<%= list[i].name.replace(".md","") %>/">
+								<h3><%= list[i].title %></h3>
+								<span><%= list[i].intro %></span>
+							</a>
+							<em>作者: <%= list[i].author %>, 创建于: <%= new Date(parseInt(list[i].updatetime,10)).Format("yyyy-MM-dd") %></em>
+						</li>
+					<% } %>
+				</ul>
+			</div>
+		</section>
+		<%- include block/body_footer %>
+	</body>
+</html>

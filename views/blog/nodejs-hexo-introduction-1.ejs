@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+	<%- include ../block/head_start %>
+		<meta name="keywords" content="template">
+		<meta name="description" content="template">
+		<title>template</title>
+	<%- include ../block/head_end %>
+	<body>
+		<%- include ../block/body_header %>
+		<%- include ../block/body_banner %>
+		<section class="section cls">
+			<div class="markdown-artical">
+				<h1><%= title %></h1>
+				<p>此文章基于nodejs而写，请先了解nodejs</p>
+
+<h5>前言</h5>
+
+<p>最近想写些文章，但是没有自己的博客平台，以前尝试过workpress，但是后来又不了了之。
+直到现在在学习nodejs，想到用它来搭建blog，发现一个平台hexo是不需要数据库的。
+现在下面开始讲述如何搭建一个博客</p>
+
+<h5>目录</h5>
+
+<ul>
+<li>1.Hexo介绍</li>
+<li>2.Hexo安装</li>
+<li>3.Hexo使用</li>
+<li>4.Hexo部署</li>
+</ul>
+
+<h2>1. Hexo介绍</h2>
+
+<p>Hexo是一个快速、简单、强大、基于node的静态博客框架。它使用的是Markdown引擎来生成静态文件和主题。 <br />
+Hexo官网：<a href="http://hexo.io" title="Hexo官网">http://hexo.io/</a></p>
+
+<h2>2. Hexo安装</h2>
+
+<p>使用命令行模式安装Hexo，依赖：nodejs，npm，下面使用-g是安装到全局变量
+<code>
+    C:\code&gt;npm install hexo -g
+</code></p>
+
+<h2>3. Hexo使用</h2>
+
+<p>在当前目录下初始化一个Hexo实例
+    C:\code>hexo init hexo_blog
+    [info] Copying data <br />
+    [info] You are almost done! Don't forget to run <code>npm install</code> before you start blogging with Hexo!  </p>
+
+<p>进入hexo_blog目录；npm install安装需要的依赖包；启动Hexo
+<code>
+C:\code&gt;cd hexo_blog <br />
+C:\code\hexo_blog&gt;npm install <br />
+hexo-renderer-ejs@0.1.0 node_modules\hexo-renderer-ejs <br />
+├── ejs@1.0.0 <br />
+└── lodash@2.4.1 <br />
+hexo-renderer-marked@0.1.0 node_modules\hexo-renderer-marked <br />
+├── marked@0.3.2 <br />
+└── lodash@2.4.1 <br />
+hexo-renderer-stylus@0.1.0 node_modules\hexo-renderer-stylus <br />
+├── nib@1.0.4 (stylus@0.45.1) <br />
+└── stylus@0.44.0 (css-parse@1.7.0, mkdirp@0.3.5, sax@0.5.8, debug@2.1.0, glob@3.2.11) <br />
+C:\code\hexo_blog&gt;hexo server <br />
+[info] Hexo is running at http://localhost:4000/. Press Ctrl+C to stop. <br />
+</code>
+此时服务已正常启动，端口4000，浏览器中输入localhost:4000即可访问，如下
+<img src="/common/img/2014/12/14/001.jpg" alt="blog demo" title="blog demo" /></p>
+
+<h2>4. Hexo部署</h2>
+
+<p>hexo部署的文件是静态文件，所以必须先生成静态文件才能放到github上面 <br />
+静态文件的默认路径是应用根目录下的public <br />
+静态文件放到你github的username.github.io库中，没有便自建此库，github.com:username/username.github.io.git <br />
+上传成功后，打开你的github二级域名即可看到你的博客，http://58981298.github.io <br />
+<code>
+C:\code\hexo_blog&gt;hexo generate <br />
+[info] Files loaded in 0.090s <br />
+[create] Generated: archives/index.html (53ms) <br />
+[create] Generated: archives/2014/index.html (13ms) <br />
+[create] Generated: archives/2014/12/index.html (8ms) <br />
+[create] Generated: index.html (12ms) <br />
+[create] Generated: 2014/12/14/hello-world/index.html (26ms) <br />
+[create] Generated: js/script.js (3ms) <br />
+[create] Generated: fancybox/blank.gif (2ms) <br />
+[create] Generated: fancybox/fancybox_loading.gif (1ms) <br />
+[create] Generated: fancybox/fancybox_loading@2x.gif (1ms) <br />
+[create] Generated: fancybox/fancybox_overlay.png (1ms) <br />
+[create] Generated: fancybox/fancybox_sprite.png (1ms) <br />
+[create] Generated: fancybox/fancybox_sprite@2x.png (1ms) <br />
+[create] Generated: fancybox/jquery.fancybox.css (1ms) <br />
+[create] Generated: fancybox/jquery.fancybox.js (1ms) <br />
+[create] Generated: fancybox/jquery.fancybox.pack.js (1ms) <br />
+[create] Generated: fancybox/helpers/fancybox_buttons.png (2ms) <br />
+[create] Generated: fancybox/helpers/jquery.fancybox-buttons.css (1ms) <br />
+[create] Generated: fancybox/helpers/jquery.fancybox-buttons.js (1ms) <br />
+[create] Generated: fancybox/helpers/jquery.fancybox-media.js (1ms) <br />
+[create] Generated: fancybox/helpers/jquery.fancybox-thumbs.css (1ms) <br />
+[create] Generated: fancybox/helpers/jquery.fancybox-thumbs.js (1ms) <br />
+[create] Generated: css/style.css (608ms) <br />
+[create] Generated: css/fonts/FontAwesome.otf (2ms) <br />
+[create] Generated: css/fonts/fontawesome-webfont.eot (1ms) <br />
+[create] Generated: css/fonts/fontawesome-webfont.svg (2ms) <br />
+[create] Generated: css/fonts/fontawesome-webfont.ttf (2ms) <br />
+[create] Generated: css/fonts/fontawesome-webfont.woff (2ms) <br />
+[create] Generated: css/images/banner.jpg (3ms) <br />
+[info] 28 files generated in 0.772s
+</code>
+<img src="/common/img/2014/12/14/002.jpg" alt="public" title="" /></p>
+			</div>
+		</section>
+		<%- include ../block/body_footer %>
+	</body>
+</html>

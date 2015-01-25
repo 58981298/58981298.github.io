@@ -1,0 +1,317 @@
+<!doctype html>
+<html>
+	<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <title>所处阶段</title>
+        <meta type="description" content="更新：增加日期限制功能，并把日期范围合并成一个obj">
+        <script type="text/javascript" src="/common/js/jquery.min.1.11.1.js"></script>
+        <script type="text/javascript" src="http://scdn.bozhong.com/source/common/js/jquery.min.js"></script>
+	</head>
+	<body>
+		
+		<div>
+        			<div class="phase-item">
+                        <label class="label-phase"><input class="radio-phase need-bady" type="radio" name="phase" data-phase="need-bady">想要宝宝</label>
+                        <span class="phase-explain">何时开始备孕：</span>
+                        <select class="need-bady select-year" id="needBaby" data-phase="need-bady" disabled>
+                            <option selected>年</option>
+                        </select>
+                        <select class="need-bady select-month" data-phase="need-bady" disabled>
+                            <option selected>月</option>
+                        </select>
+                        <select class="need-bady select-day" data-phase="need-bady" disabled>
+                            <option selected>日</option>
+                        </select>
+                    </div>
+                    <div class="phase-item">
+                        <label class="label-phase"><input class="radio-phase make-bady" type="radio" name="phase" data-phase="make-bady">怀上宝宝</label>
+                        <span class="phase-explain">预产期：</span>
+                        <select class="make-bady select-year" id="makeBaby" data-phase="make-bady" disabled>
+                            <option selected>年</option>
+                        </select>
+                        <select class="make-bady select-month" data-phase="make-bady" disabled>
+                            <option selected>月</option>
+                        </select>
+                        <select class="make-bady select-day" data-phase="make-bady" disabled>
+                            <option selected>日</option>
+                        </select>
+                    </div>
+                    <div class="phase-item">
+                        <label class="label-phase"><input class="radio-phase has-bady" type="radio" name="phase" data-phase="has-bady">已有宝宝</label>
+                        <span class="phase-explain">宝宝生日：</span>
+                        <select class="has-bady select-year" id="hasBaby" data-phase="has-bady" disabled>
+                            <option selected>年</option>
+                        </select>
+                        <select class="has-bady select-month" data-phase="has-bady" disabled>
+                            <option selected>月</option>
+                        </select>
+                        <select class="has-bady select-day" data-phase="has-bady" disabled>
+                            <option selected>日</option>
+                        </select>
+                    </div>
+		</div>
+
+        <!-- 仅供测试使用 -->
+        <br/><br/><br/>
+        以下仅供测试使用
+        <a id="getId" style="cursor: pointer; background: rgb(247, 97, 97); display:block; width: 240px;height:30px;line-height:30px; text-align:center; border-radius: 4px; color: #fff;" date-text="仅供测试使用">获取所处阶段的值及其日期</a>
+        <select>
+            <option>2</option>
+            <option>123</option>
+            <option>123</option>
+        </select>    
+         <!-- 仅供测试使用 -->
+
+        <script type="text/javascript">
+            var tool = {
+                getYMD: function(type){
+                    var d = new Date();
+                    var year = d.getFullYear();
+                    var month = d.getMonth()+1;
+                    if(year<2014) year = 2014;
+                    switch(type){
+                        case "year": return year; break;
+                        case "month": return month; break;
+                        case "day": return d.getDate(); break;
+                        default: return year+"-"+month+"-"+d.getDate(); break;
+                    }
+                },
+                optionEqualVal: function(ele, val){
+                    for( var i = 0; i<ele.length; i++ ){
+                        if( parseInt(ele.eq(i).val(),10) == parseInt(val,10) ) ele.eq(i)[0].selected = true;
+                    }
+                }
+            }
+
+            var form = {
+                requiredSelect: function(ele, alerttext) {
+                    alerttext = alerttext == "" || typeof alerttext == "undefined" ? "请选择数据" : alerttext;
+                    if (ele.find("option:selected").index() == 0) {
+                        alert(alerttext);
+                        ele.focus();
+                        return false;
+                    } else return true;
+                }
+            }
+            _G = {};
+
+            var phase = {
+                // 所处阶段事件集合，version:0.0.2
+                init: function(){
+                    phase.radio();
+                    phase.dataInit();
+                    phase.listen();
+                },
+                // 通过选择所处阶段类型来，使所处阶段时间是否disabled
+                radio: function(){
+                    $(".radio-phase").click(function(){
+                        $(".select-year, .select-month, .select-day").attr("disabled", true).find("option:eq(0)").attr("selected","selected");
+                        $( "."+$(this).attr("data-phase") ).attr("disabled", false);
+                    });
+                },
+                // 初始化年份选择
+                dataInit: function(){
+                    _G.curyear = tool.getYMD("year");
+                    _G.curmonth = tool.getYMD("month");
+                    _G.curday = tool.getYMD("day");
+                    _G.dataScope = {
+                        'need-bady': {
+                            'start': {
+                                'year': _G.curyear-10,
+                                'month': 12,
+                                'day': null
+                            },
+                            'end': {
+                                'year': _G.curyear,
+                                'month': _G.curmonth,
+                                'day': _G.curday
+                            }
+                        },
+                        'make-bady': {
+                            'start': {
+                                'year': _G.curyear,
+                                'month': _G.curmonth,
+                                'day': _G.curday
+                            },
+                            'end': {
+                                'year': _G.curmonth+10 <= 12 ? _G.curyear : _G.curyear+1,
+                                'month': parseInt(_G.curmonth+10 <= 12 ? _G.curmonth+10 : 12, 10),
+                                'day': null
+                            }
+                        },
+                        'has-bady': {
+                            'start': {
+                                'year': _G.curyear-10,
+                                'month': 12,
+                                'day': null
+                            },
+                            'end': {
+                                'year': _G.curyear,
+                                'month': _G.curmonth,
+                                'day': _G.curday
+                            }
+                        }
+                    };
+                    //console.log( _G.dataScope );
+                    // 初始化年份：想要宝宝
+                    phase.getOptions( $(".need-bady").eq(1), _G.dataScope['need-bady'].start.year, _G.dataScope['need-bady'].end.year );
+                    // 初始化年份：怀上宝宝
+                    phase.getOptions( $(".make-bady").eq(1), _G.dataScope['make-bady'].start.year, _G.dataScope['make-bady'].end.year );
+                    // 初始化年份：已有宝宝
+                    phase.getOptions( $(".has-bady").eq(1), _G.dataScope['has-bady'].start.year, _G.dataScope['has-bady'].end.year );
+                },
+                listen: function(){
+                    // 年份改变时更新月份
+                    $(".select-year").change(function(){
+                        var type = $(this).attr("data-phase");
+                        var y = $(this).val();
+                        switch(type){
+                            // 想要宝宝
+                            case "need-bady":
+                                var ind = y == _G.dataScope[type].end.year ? 'end' : 'start';
+                                phase.getOptions( $( ".select-month."+type ), 1, _G.dataScope[type][ind].month ); 
+                                break;
+                            // 怀上宝宝
+                            case "make-bady":
+                                if( y == _G.dataScope[type].start.year ){ // 预产期的月份范围：当前月份至当前月份+10个月
+                                    phase.getOptions( $( ".select-month."+type ), _G.dataScope[type].start.month , _G.dataScope[type].end.month );
+                                } else {
+                                    phase.getOptions( $( ".select-month."+type ), 1 , parseInt(_G.dataScope[type].start.month-2,10) );
+                                }
+                                break;
+                            // 已有宝宝
+                            case "has-bady": 
+                                var ind = y == _G.dataScope[type].end.year ? 'end' : 'start';
+                                phase.getOptions( $( ".select-month."+type ), 1, _G.dataScope[type][ind].month ); 
+                                break;
+                            default: break;
+                        }
+                        $(".select-month."+type).trigger("change"); // 加载当前年月的天数
+                    });
+
+                    /*
+                     * 想要宝宝：何时备孕：当前时间之前（之前10年内）
+                     * 怀上宝宝：预产期：当前时间至10个月内
+                     * 已有宝宝：宝宝生日：当前时间之前（之前10年内）
+                     */
+
+                    // 月份改变时更新天数
+                    $(".select-month").change(function(){
+                        var type = $(this).attr("data-phase"); // 当前所处阶段的类型
+                        var y = $(".select-year."+type).val()
+                        var m = parseInt( $(this).val(),10 );
+                        var dStart = -1;
+                        var dEnd = -1;
+                        if( m > 0 ){ //当前所处阶段有选择月份才能加载对应天数
+                            switch( type ){
+                                case "need-bady":
+                                    if( y == _G.dataScope[type].start.year && m == _G.dataScope[type].start.month ){
+                                        var d = _G.dataScope[type].start.day == null ? phase.getDay(y,m) : _G.dataScope[type].start.day;
+                                        phase.getOptions( $( ".select-day."+type ), 1, d );
+                                    } else if( y == _G.dataScope[type].end.year && m == _G.dataScope[type].end.month ){
+                                        phase.getOptions( $( ".select-day."+type ), 1, _G.dataScope[type].end.day-1 );
+                                    } else {
+                                        phase.getOptions( $( ".select-day."+type ), 1, phase.getDay(y,m) );
+                                    }
+                                    break;
+                                case "make-bady":
+                                    if( y == _G.dataScope[type].start.year && m == _G.dataScope[type].start.month ){
+                                        phase.getOptions( $( ".select-day."+type ), _G.dataScope[type].start.day+1, phase.getDay(y,m) );
+                                    } else {
+                                        phase.getOptions( $( ".select-day."+type ), 1, phase.getDay(y,m) );
+                                    }
+                                    break;
+                                case "has-bady":
+                                    if( y == _G.dataScope[type].start.year && m == _G.dataScope[type].start.month ){
+                                        var d = _G.dataScope[type].start.day == null ? phase.getDay(y,m) : _G.dataScope[type].start.day;
+                                        phase.getOptions( $( ".select-day."+type ), 1, d );
+                                    } else if( y == _G.dataScope[type].end.year && m == _G.dataScope[type].end.month ){
+                                        phase.getOptions( $( ".select-day."+type ), 1, _G.dataScope[type].end.day-1 );
+                                    } else {
+                                        phase.getOptions( $( ".select-day."+type ), 1, phase.getDay(y,m) );
+                                    }
+                                    break;  
+                                default: break;                   
+                            }
+                        } else {
+                            phase.getOptions( $( ".select-day."+type ) );
+                        }
+                    });
+                },
+                // 生成数字的option
+                getOptions: function(ele,min,max){
+                    var typename = ele.find("option").eq(0).html(); // 获取第一个option
+                    var elevalue = ele.val(), val, option;
+                    option = "<option value='" + typename + "'>" + typename + "</option>";
+                    while( min <= max ){
+                        val = min + "";
+                        val = val.length == 1 ? "0" + val : val;
+                        if (elevalue == min) option += "<option value='" + val + "' selected>" + val + "</option>";
+                        else option += "<option value='" + val + "'>" + val + "</option>";
+                        min++;
+                    }
+                    ele.empty().append(option);
+                },
+                // 获取对应年月的天数
+                getDay: function(year, month) {
+                    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+                        return 31;
+                    } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+                        return 30;
+                    } else if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+                        return 29;
+                    } else return 28;
+                },
+                // 验证所处阶段表单数据
+                validate: function(){
+                    var type = $(".radio-phase:checked").attr("data-phase");
+                    if( $(".radio-phase:checked").length == 0 ){ // 验证是否选择所处阶段的类型
+                        alert("请选择你所在的所处阶段！");
+                        $(".radio-phase").eq(0).focus();
+                        return false;
+                    } else if( // 验证选中的所处阶段的类型的年月日是否已选
+                        form.requiredSelect( $(".select-year."+type), "请选择年份" )
+                        && form.requiredSelect( $(".select-month."+type), "请选择月份" )
+                        && form.requiredSelect( $(".select-day."+type), "请选择日" )
+                    ) return true;
+                    else return false;
+                },
+                // 获得选中的所处阶段类型的值
+                getType: function(){
+                    var type = $(".radio-phase:checked").attr("data-phase");
+                    return type == "need-bady" ? 1 : ( type == "make-bady" ? 2 : (type == "has-bady" ? 4 : 0) );
+                },
+                // 获得选中的所处阶段类型的日期
+                getTypeDate: function(){
+                    var type = $(".radio-phase:checked").attr("data-phase");
+                    return $(".select-year."+type).val()+"-" + $(".select-month."+type).val()+"-" + $(".select-day."+type).val();
+                },
+                // 加载所处阶段的类型及其日期
+                loadTypeDate: function(type,year,month,day){
+                    type = type == 1 ? "need-bady" : (type == 2 || type == 3 ? "make-bady" : (type == 4 ? "has-bady" : "has-bady") );
+                    // 加载所处阶段当前类型
+                    $(".radio-phase."+type).trigger("click");
+                    // 加载所处阶段当前类型的年份
+                    tool.optionEqualVal( $(".select-year."+type+" option"), year );
+                    $(".select-year."+type).trigger("change");
+                    // 加载所处阶段当前类型的月份
+                    tool.optionEqualVal( $(".select-month."+type+" option"), month );
+                    $(".select-month."+type).trigger("change");
+                    // 加载所处阶段当前类型的天数
+                    tool.optionEqualVal( $(".select-day."+type+" option"), day );
+                }
+            }
+            phase.init();
+            
+
+            // 仅供测试使用,功能：获得数据，提交表单
+            $("#getId").click(function(){
+                if( phase.validate() ){
+                    alert( "所处阶段是" + $(".radio-phase:checked").attr("data-phase") + ",值=" + phase.getType() + ",日期：" + phase.getTypeDate() );
+                }
+            });
+            phase.loadTypeDate(3,2014,10,04); // 加载论坛的信息
+        </script>
+
+	</body>
+</html>
